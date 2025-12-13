@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Find Your Dream Job</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Careers</h1>
+        <p>Find your dream job with us</p>
+    </header>
+    <main>
+        <h2>Open Positions</h2>
+        <div class="jobs-list">
+            {% for job in jobs %}
+            <div class="job-card">
+                <h3>{{ job.title }}</h3>
+                <p class="location">{{ job.location }}</p>
+                <p class="salary">{{ job.salary }}</p>
+                <a href="{{ url_for('job_detail', job_id=job.id) }}" class="btn">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        <p>Careers Website</p>
+    </footer>
+</body>
+</html>
