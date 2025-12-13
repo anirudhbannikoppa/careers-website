@@ -1,36 +1,38 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-JOBS = [
-    {
-        'id': 1,
-        'title': 'Software Engineer',
-        'location': 'San Francisco, CA',
-        'salary': '$120,000 - $150,000'
-    },
-    {
-        'id': 2,
-        'title': 'Data Analyst',
-        'location': 'New York, NY',
-        'salary': '$90,000 - $110,000'
-    },
-    {
-        'id': 3,
-        'title': 'Product Manager',
-        'location': 'Remote',
-        'salary': '$130,000 - $160,000'
-    }
-]
+JOBS = [{
+    'id': 1,
+    'title': 'Data Analyst',
+    'location': 'Bengaluru, India',
+    'salary': 'Rs. 10,00,000'
+}, {
+    'id': 2,
+    'title': 'Data Scientist',
+    'location': 'Delhi, India',
+    'salary': 'Rs. 15,00,000'
+}, {
+    'id': 3,
+    'title': 'Frontend Engineer',
+    'location': 'Remote'
+}, {
+    'id': 4,
+    'title': 'Backend Engineer',
+    'location': 'San Francisco, USA',
+    'salary': '$150,000'
+}]
 
-@app.route('/')
-def home():
-    return render_template('home.html', jobs=JOBS)
 
-@app.route('/job/<int:job_id>')
-def job_detail(job_id):
-    job = next((j for j in JOBS if j['id'] == job_id), None)
-    return render_template('job.html', job=job)
+@app.route("/")
+def hello_jovian():
+    return render_template('home.html', jobs=JOBS, company_name='Jovian')
+
+
+@app.route("/api/jobs")
+def list_jobs():
+    return jsonify(JOBS)
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', debug=True)
