@@ -5,10 +5,11 @@ conn = s2.connect(
     port=3333,
     user="anirudh",
     password="u*xZ%1#ljdR$o1%-C-1X[UuAo",
-    database="db_anirudh_f9191"
+    database="db_anirudh_f9191",
+    results_type='dict'
 )
 
 with conn:
-  with conn.cursor(dictionary=True) as cur:
+  with conn.cursor() as cur:
     cur.execute("SELECT * FROM jobs")
     print(cur.fetchall())
